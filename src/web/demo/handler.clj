@@ -12,7 +12,7 @@
 (defn- log-request
   [$request]
   (swap! call-count inc)
-  (println "[ACCESS] " (:request-method $request) (:uri $request) @call-count "time(s)"
+  (println "[ACCESS]" @call-count (:request-method $request) (:uri $request)
            ;(str $request)
            )
   nil)
