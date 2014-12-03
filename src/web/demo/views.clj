@@ -19,8 +19,8 @@
 
 (def records
   [
-   {:name "John Doe" :age 34}
-   {:name "Peter Simpson" :age 25}
+   {:name "John Doe" :age 34 :住所 "アメリカ"}
+   {:name "Peter Simpson" :age 25 :住所 "フランス"}
    ])
 
 (defn table-page []
@@ -31,9 +31,9 @@
     [:body
      [:h1 "Hello World こんにちは世界"]
      [:table#table1 {:border 1}
-      [:tr [:td "名前"] [:td "年齢"]]
+      [:tr [:td "名前"] [:td "年齢"] [:td "住所"]]
       (for [$rec records]
-        [:tr [:td (:name $rec)] [:td (:age $rec)]]
+        [:tr [:td (:name $rec)] [:td (:age $rec)] [:td (:住所 $rec)]]
         )
       ]
      ]))
