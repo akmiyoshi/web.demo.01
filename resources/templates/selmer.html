@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>selmer HTML</title>
+</head>
+<body>
+  <p>selmer.htmlです！</p>
+  <p>{{name}}</p>
+  
+  <ul>
+  {% for rec in records %}
+    <li> {{rec.name}} {{rec.age}} </li>
+  {% endfor %}
+  </ul>  
+  
+  <img alt="猫" src="neko.jpg" />
+</body>
+</html>
