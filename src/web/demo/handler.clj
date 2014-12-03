@@ -1,5 +1,6 @@
 (ns web.demo.handler
   (:use [web.demo.views])
+  (:use [clojure.pprint :only (pprint pp)])
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [compojure.handler :as handler]
@@ -36,6 +37,7 @@
   (GET "/mt" [] (main-template))
   (GET "/sp1" [] (selmer-page-1))
   (GET "/sp2" [] (selmer-page-2))
+  (GET "/ep2" [] (enlive-page-2))
   (GET "/video/:id" [id] (println id) (str "id2=" id))
   (GET "/user/:user" [user x] (println user) (str " user=" user " x=" x))
   (route/resources "/")

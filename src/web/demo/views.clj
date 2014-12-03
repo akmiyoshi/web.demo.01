@@ -1,19 +1,20 @@
 (ns web.demo.views
+  (:use [clojure.pprint :only (pprint pp)])
   (:require 
-    [clostache.parser :as mustache]
+    [clostache.parser :as clostache]
+    [net.cgrand.enlive-html :as enlive]
+    [hiccup.page :as hiccup]
     [selmer.parser :as selmer]
-    [net.cgrand.enlive-html :as html]
-    [hiccup.page :as page]
     ))
 
 (defn clostache-page-1 []
-  (mustache/render "<body>
+  (clostache/render "<body>
   Hello(こんにちは), {{name}}!
 </body>" {:name "Felix"})
   )
 
 (defn clostache-page-2 []
-  (mustache/render-resource "templates/hello.mustache" {:name "Michael"})
+  (clostache/render-resource "templates/hello.mustache" {:name "Michael"})
   )
 
 (def records
@@ -23,10 +24,10 @@
    ])
 
 (defn table-page []
-  (page/xhtml
+  (hiccup/xhtml
     [:head
      [:title "Hello World こんにちは世界"]
-     (page/include-css "/css/style.css")]
+     (hiccup/include-css "/css/style.css")]
     [:body
      [:h1 "Hello World こんにちは世界"]
      [:table#table1 {:border 1}
@@ -37,9 +38,9 @@
       ]
      ]))
 
-(html/deftemplate main-template "templates/application.html"
+(enlive/deftemplate main-template "templates/application.html"
   []
-  [:head :title] (html/content "Enlive starter kit"))
+  [:head :title] (enlive/content "Enlive starter kit"))
 
 (defn selmer-page-1 []
   (selmer/render "Hello {{name}}!" {:name "Yogthos"})
@@ -49,3 +50,38 @@
   (selmer/render "Hello {{name}}!" {:name "Yogthos"})
   (selmer/render-file "templates/selmer.html" {:name "John" :records records})
   )
+
+(enlive/defsnippet snippet-product "templates/product.html" [:div.header]
+  [{name :name, desc :desc, price :price maker :maker, url :url}]
+  [:h1] (enlive/content name)
+  [:h2] (enlive/transform-content(enlive/replace-vars {:PRODUCT_NAME name}))
+  [:div.description] (enlive/content desc)
+  [:div.price] (enlive/content price)
+  [:a.maker] (enlive/content maker)
+  [:a.maker] (enlive/set-attr :href url))
+
+(enlive/deftemplate template-product-list "templates/product.html"
+  [products]
+  [:div.header]
+  (enlive/substitute (map #(snippet-product %) products)))
+
+(def product-list
+  [{:name "BOLT"
+    :desc "COMBINATION WALL CHARGER AND BATTERY BACKUP"
+    :price "$59.99"
+    :maker "FLUXMOB"
+    :url "http://www.fluxmob.com"}
+   {:name "HiddenRadio2"
+    :desc "The world's simplest, most advanced wireless multispeaker for iPhone + iPad"
+    :price "$149.00"
+    :maker "HIDDEN"
+    :url "http://www.hiddenradiodesign.com/"}]
+  )
+
+(defn enlive-page-2 []
+  (template-product-list product-list)
+  )
+
+(println (apply str (template-product-list product-list)))
+
+;(pprint (template-product-list product-list))
