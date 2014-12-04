@@ -92,3 +92,18 @@
 ;(println (apply str (template-product-list product-list)))
 
 ;(pprint (template-product-list product-list))
+
+(enlive/defsnippet snippet-table "templates/table.html" [:tr.header]
+  [{name :name, desc :desc, price :price maker :maker, url :url}]
+  [:td.prod_name] (enlive/content name)
+  [:td.description] (enlive/content desc)
+  )
+
+(enlive/deftemplate template-table "templates/table.html"
+  [products]
+  [:tr.header]
+  (enlive/substitute (map #(snippet-table %) products)))
+
+(defn enlive-page-1 []
+  (template-table product-list)
+  )

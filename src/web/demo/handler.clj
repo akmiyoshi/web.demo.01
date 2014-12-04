@@ -37,6 +37,7 @@
   (GET "/mt" [] (main-template))
   (GET "/sp1" [] (selmer-page-1))
   (GET "/sp2" [] (selmer-page-2))
+  (GET "/ep1" [] (enlive-page-1))
   (GET "/ep2" [] (enlive-page-2))
   (GET "/video/:id" [id] (println id) (str "id2=" id))
   (GET "/user/:user" [user x] (println user) (str " user=" user " x=" x))
