@@ -60,10 +60,17 @@
   [:a.maker] (enlive/content maker)
   [:a.maker] (enlive/set-attr :href url))
 
+;(enlive/deftemplate template-product-list "templates/product.html"
+;  [products]
+;  [:div.header]
+;  (enlive/substitute (map #(snippet-product %) products)))
+
 (enlive/deftemplate template-product-list "templates/product.html"
   [products]
   [:div.header]
-  (enlive/substitute (map #(snippet-product %) products)))
+  (let [x (map #(snippet-product %) products)]
+    (pprint x)
+    (enlive/substitute x)))
 
 (def product-list
   [{:name "BOLT"
@@ -82,6 +89,6 @@
   (template-product-list product-list)
   )
 
-(println (apply str (template-product-list product-list)))
+;(println (apply str (template-product-list product-list)))
 
 ;(pprint (template-product-list product-list))
