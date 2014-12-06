@@ -5,7 +5,9 @@
     [net.cgrand.enlive-html :as enlive]
     [hiccup.page :as hiccup]
     [selmer.parser :as selmer]
-    ))
+    )
+  (import [web.demo HelloWorldJava])
+  )
 
 (defn clostache-page-1 []
   (clostache/render "<body>
@@ -107,3 +109,5 @@
 (defn enlive-page-1 []
   (template-table product-list)
   )
+
+(println (.sayHello (HelloWorldJava.) "Tom"))
