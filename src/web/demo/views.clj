@@ -120,6 +120,7 @@
 (println (str (bean person1)))
 (prn (str (bean person1)))
 (prn (bean person1))
+(prn (class (bean person1)))
 
 (defstruct person :name :age :salary)             ;;; #'user/person
 (def p (struct person "Diego Pacheco" 27 100))    ;;; #'user/p
