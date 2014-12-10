@@ -1,7 +1,7 @@
 (defproject web.demo.01 "2014.12.02"
   :min-lein-version "2.0.0"
 ;  :java-cmd "C:\\jdk1.8.0_05\\bin\\java.exe"
-  :java-source-paths ["src"]
+  :java-source-paths ["java"]
   :javac-opts ["-target" "1.6" "-source" "1.6" "-xlint:-options"]
   :prep-tasks ["javac"]
   :dependencies [[org.clojure/clojure "1.6.0"]
