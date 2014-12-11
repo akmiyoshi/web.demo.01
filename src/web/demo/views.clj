@@ -7,8 +7,8 @@
     [selmer.parser :as selmer]
     )
   (import [web.demo HelloWorldJava])
-  (import [web.demo Person])
-  (import [web.demo Logic])
+  (import [web.demo JavaPerson])
+  (import [web.demo JavaLogic])
   )
 
 (defn clostache-page-1 []
@@ -113,8 +113,8 @@
   )
 
 (println (.sayHello (HelloWorldJava.) "Tom"))
-(println (Person. "Mary" 21))
-(def person1 (Person. "Mary" 21))
+(println (JavaPerson. "Mary" 21))
+(def person1 (JavaPerson. "Mary" 21))
 (println (:name person1))
 (println (bean person1))
 (println (str (bean person1)))
@@ -126,7 +126,7 @@
 (def p (struct person "Diego Pacheco" 27 100))    ;;; #'user/p
 (prn (:name p))                                   ;;; "Diego Pacheco" nil
 
-(def persons (Logic/getPersons))
+(def persons (JavaLogic/getPersons))
 (prn persons)
 (def personBeans (map bean persons))
 (prn personBeans)
